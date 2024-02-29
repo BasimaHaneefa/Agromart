@@ -1,0 +1,111 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1 align="center">SubAdmin Registration</h1>
+        <table border="2" align="center" cellpadding="10" style="border-collapse: collapse;">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txtname" value="{{name.name}}" required autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="number" name="txtco" value="{{contact.name}}" required="" autocomplete="off" placeholder="0123456789" pattern="[0-9]{10}" required=""></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="txtemail" value="{{email.name}}" autocomplete="off" pattern="[^ @]*@[^ @]*" placeholder="Enter Email" id="email" required=""></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><input type="text" name="txtaddress" value="{{address.name}}" placeholder="Enter Address" required=""></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" name="gender" value="male" required="" autocomplete="off">Male
+                <input type="radio" name="gender" value="female">Female</td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><select name="sel_dis" id="" required="" autocomplete="off">
+                    <option value="dis">--select--</option>
+                    {% for i in district %}
+                    <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                  </select></td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="txtphoto" value="photo.name" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txtpassword" value="{{password.name}}" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></td>
+            </tr>
+            <tr>
+                <td>Confirm password</td>
+                <td><input type="password" name="txtconfirmpassword"   onblur="return checkpwd(this,pwd)" placeholder="Re-enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></td>
+            </tr>
+            <tr>
+                <td><td colspan="2" align="cellpadding"><input type="submit" value="save" name="btn"><input type="reset" value="cansel" name="btnc"></td></td>
+        
+            </tr>
+            <tr></tr>
+        </table>
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>email</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>District</th>
+                <th>Photo</th>
+                <th>Password</th>
+                
+                <th>Action</th>
+            </tr>
+
+            {% for i in subadmin %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.contact}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.gender}}</td>
+                <td>{{i.district}}</td>
+                <td><img src="{{i.photo.url}}" alt="img" width="120px" height="120px"></td>
+                <td>{{i.password}}</td>
+               
+                <td><a href="{% url 'wadmin:delsubadmin' i.id %}">Delete</a></td>
+
+            </tr>
+            {% endfor %}
+               
+
+        </table>
+    </form>
+    <script>
+        {% if msg %}
+        alert("{{msg}}")
+        {% endif %}
+    </script>
+</body>
+</html>
+
+{% endblock content %}

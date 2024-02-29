@@ -1,0 +1,35 @@
+def PAYMENT(request):
+    if 'uid' in request.session:
+        if request.method=="POST": 
+            ids=Booking.objects.get(id=request.session["bookingsid"])
+            ids.booking_status=1
+            ids.save()
+            return redirect("user:processingpayment")
+        else:
+            return render(request,"User/Payment.html")
+    else:
+        return redirect("Guest:login")
+    
+
+
+
+def processingpayment(request):
+    if 'uid' in request.session:
+        return render(request,"User/runpayment.html")
+    else:
+        return redirect("Guest:login")
+    
+
+def paysucess(request):
+    if 'uid' in request.session:
+        return render(request,"User/paysucessful.html")
+    else:
+        return redirect("Guest:login")
+
+
+URLS
+--------
+
+    path('payment/',views.PAYMENT,name="payment"),
+    path('processingpayment/',views.processingpayment,name="processingpayment"),
+    path('patmentsucessful/',views.paysucess,name="patmentsucessful"),

@@ -1,0 +1,88 @@
+{% extends 'Subadmin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h2><b>Add Products<br></b></h2></center>
+    <form action="" method="post" id="UserForm"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="1"  align="center">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txtname" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><input type="text" name="txtname1" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Image</td>
+                <td><input type="file" name="image" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Rate</td>
+                <td><input type="text" name="txtname2" required="" autocomplete="off"></td>
+            </tr>
+            <tr><td>Product Type</td>
+                <td><select name="sel_Producttype" id="ProductType" required="" autocomplete="off">
+                    <option value="">--SELECT--</option>
+                    {% for i in ProdType %}
+                    <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                  </select></td>
+            </tr>
+            <tr>
+                <td align="center"><input type="submit" value="submit">
+                <input type="submit" value="cancel"></td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table border="1" align="center">
+            <tr>
+                <td>SLNO:</td>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Image</td>
+                <td>Rate</td>
+                <td>Product Type</td>
+                <td colspan="4">Action</td>
+                
+    
+            </tr>
+          
+                {% for i in pro %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.product_name}}</td>
+                <td>{{i.product_description}}</td>
+                <td align="center"><img src="{{i.product_image.url}}" width="150" height="150"></td> 
+                <td>{{i.product_rate}}</td>
+                <td>{{i.producttype}}</td>
+                <td><a href="{% url 'subadmin:delproduct' i.id%}">Delete</a></td>
+                <td><a href="{% url 'subadmin:prodstock' i.id%}">Add Stock</a></td>
+               
+            </tr>
+            {% endfor %}
+          
+        </table>
+      
+
+    </form>
+    <script>
+        {% if msg %}
+        alert("{{msg}}")
+        {% endif %}
+    </script>
+</body>
+</html>
+
+{% endblock content %}

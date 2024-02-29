@@ -1,0 +1,52 @@
+{% extends 'Farmer/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USER</title>
+</head>
+<body>
+    <form action="" method="post">
+        <H1 align="center">USER ACCEPT</H1>
+        <table border="2" align="center" cellpadding="2">
+            <tr>
+                <th>Sl.no</th>
+                <th>UserName</th>
+                <th>Email</th>
+               <th>Address</th>
+               <th>contact</th>
+                <th>
+                    Content</th>
+                    <th>product</th>
+                    <th>Action</th>
+            
+               
+            
+            </tr>
+            {% for i in udata %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.user.name}}</td>
+                <td>{{i.user.email}}</td>
+                <td>{{i.user.address}}</td>
+                <td>{{i.user.contact}}</td>
+                <td>{{i.content}}</td>
+                <td>{{i.product.name}}</td>
+                <td><a href="{% url 'farmer:acceptuser' i.id %}">Accept</a></td>
+            
+                
+            </tr>
+            {% endfor %}
+
+        </table>
+    </form>
+    
+</body>
+</html>
+
+{% endblock content %}

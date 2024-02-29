@@ -1,0 +1,97 @@
+{% extends 'Farmer/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+</head>
+<body>
+    <H1 align="center">Product</H1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="2" align="center" cellpadding="10">
+        <tr>
+                <td>Product name </td>
+                <td><input type="text" name="pname" id="" required="" autocomplete="off"></td>
+        </tr>
+        <tr>
+            <td>Product Details </td>
+            <td><input type="text" name="pdetails" id="" required="" autocomplete="off"></td>
+        </tr>
+        <tr>
+            <td>Product Image</td>
+            <td><input type="file" name="pphoto" id="" required="" autocomplete="off"></td>
+        </tr>
+        <tr>
+            <td> ProductType</td>
+            <td><select name="sel_pytpe" id="ptype" required="" autocomplete="off">
+                <option value="">--select--</option>
+                {% for i in ptype %}
+                <option value="{{i.id}}">{{i}}</option>
+                {% endfor %}
+              </select></td>
+        </tr>
+       
+       
+        <tr>
+            <td>Product rate</td>
+            <td><input type="text" name="prate" id="" required="" autocomplete="off"></td>
+        </tr>
+
+       
+      
+        <tr>
+            <td><input type="submit" value="save"> <input type="submit" value="cancel"></td>
+        </tr>
+
+
+        </table>
+    
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Product name</th>
+            <th>Product details</th>
+            <th>Product Image</th>
+            <th>Product Type</th>
+            <th>Product rate</th>
+            <th>Farmer Name</th>
+            <th>Action</th>
+        </tr>
+
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.details}}</td>
+           
+            <td><img src="{{i.photo.url}}" width="100px" height="100px" /></td>
+            <td>{{i.ptype}}</td>
+            <td>{{i.rate}}</td>
+            <td>{{i.farmer.name}}</td>
+            <td><a href="{% url 'farmer:delproduct' i.id %}">Delete</a></td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <h3>Upload Stocks</h3>
+    
+    <a href="{% url 'farmer:stock' %}">Stock Details</a>
+   
+</form>
+<script>
+    {% if msg %}
+    alert("{{msg}}")
+    {% endif %}
+</script>
+</body>
+</html>
+
+{% endblock content %}

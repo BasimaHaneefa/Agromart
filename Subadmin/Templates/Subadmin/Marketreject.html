@@ -1,0 +1,61 @@
+{% extends 'Subadmin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARKET</title>
+</head>
+<body>
+    <form action="" method="post">
+        <H1 align="center">NEWMARKET REJECT</H1>
+        <table border="2" align="center" cellpadding="2">
+            <tr>
+                <th>Sl.no</th>
+           
+              
+                <th>
+                    Name
+                </th>
+            
+                <th>
+                    contact
+                </th>
+           
+                <th>
+                    Email
+                </th>
+            
+                <th>
+                    Address
+                </th>
+           
+                <th>
+                    Action
+                </th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.contact}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.address}}</td>
+                <td><a href="{% url 'subadmin:acceptmarket' i.id %}">Accept</a></td>
+            
+                
+            </tr>
+            {% endfor %}
+
+
+        </table>
+    </form>
+    
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends 'Subadmin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><i><h1>Add Stock</i></h1></p></center> 
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1">
+            <tr>
+                <td>Stock</td>
+                <td><input type="text" name="txt1" ></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit">
+                    <input type="reset" name="cancel">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table border="1" align="center">
+            <tr>
+                <td>SLNO:</td>
+                <td>Name</td>
+                <td>Image</td>
+                <td>Product Type</td>
+                <td>Stock</td>
+                <td>Action</td>
+                
+    
+            </tr>
+          
+                {% for i in Prodstock %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.product.product_name}}</td>
+                <td align="center"><img src="{{i.product.product_image.url}}" width="150" height="150"></td> 
+                <td>{{i.product.producttype}}</td>
+                <td>{{i.product_stock}}</td>
+                <td><a href="{% url 'subadmin:delprodstock' i.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+          
+        </table>
+    </form>
+</body>
+</html>
+
+{% endblock content %}

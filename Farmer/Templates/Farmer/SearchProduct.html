@@ -1,0 +1,93 @@
+{% extends 'Farmer/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post" id="Search_Pdt"  data-url="{% url 'farmer:GetProduct' %}">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>Type</td>
+                <td><select name="sel_type" id="type">
+                    <option value="">----select----</option>
+                    
+                    {% for i in TYP %}
+                        <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                        
+                </select></td>
+            </tr>
+        </table>
+        <br />
+    <hr />
+    <br />
+    <div id="data">
+        <table align="center" cellpadding="50" style="border-collapse: collapse">
+            <tr>
+                {% for i in PD %}
+
+                <td>
+                    <div style="text-align:center;border:1px solid black;margin:22px;padding:15px">
+
+                        <p><img src="{{i.product_image.url}}" width="100px" height="100px" /></p>
+                        
+                        <p>Name: {{i.product_name}}</p>
+                        
+                        <p>Rate: {{i.product_rate}}</p>
+                        
+                        <p>Tpye: {{i.producttype}}</p>
+                        
+                        <p>About: {{i.product_description}}</p>
+                        
+                        <p><a href="{% url 'farmer:Request' i.id %}">Request</a></p>
+                        
+        
+                        
+                        <br>
+                    </div>
+                </td>
+                {% if forloop.counter|divisibleby:4 %}
+            </tr>
+            <tr>
+                {% endif %}
+
+
+                {% endfor %}
+        </table>
+        <br><br><br>
+    </form>
+</body>
+</html>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    
+    
+        $("#type").change(function () {
+            var tid = $(this).val();
+            var ur = $("#Search_Pdt").attr("data-url");
+            $.ajax({
+                url: ur,
+                data: { tid:tid },
+                success: function (data) {
+                    //alert(data);
+                    $("#data").html(data);
+                },
+            });
+        });
+    </script>
+
+{% endblock content %}
+
+
+    

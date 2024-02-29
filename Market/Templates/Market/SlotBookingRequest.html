@@ -1,0 +1,55 @@
+{% extends 'Market/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USER</title>
+</head>
+<body>
+    <form action="" method="post">
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <H1 align="center"> Allot Slot</H1>
+        <table border="2" align="center" cellpadding="2">
+            <tr>
+                <th>Sl.no</th>
+                <th>Farmer</th>
+                <th>Address</th>
+                <th>Event</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Event Description</th>
+                <th>Action</th>
+               
+            
+            </tr>
+            {% for i in SlotBooking %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.farmer.name}}</td>
+                <td>{{i.farmer.email}}</td>
+                <td>{{i.farmer.address}}</td>
+                <td>{{i.slotbookdate}}</td>
+                <td>{{i.slotbooktime}}</td>
+                <td>{{i.marketevent.marketevent_description}}</td>
+                <td><a href="{% url 'market:Allotslot' i.id %}">Allot slot</a></td>
+            
+                
+            </tr>
+            {% endfor %}
+
+        </table>
+    </form>
+    
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends 'Market/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h2><b><br></b></h2></center>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <form action="" method="post" id="UserForm"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="0" align="center">
+            <tr>
+                <td>Date</td>
+                <td><input type="date" name="date" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Start Time</td>
+                <td><input type="time" name="time" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><textarea name="txt" required="" autocomplete="off"></textarea></td>
+            </tr>
+            <tr><td><input type="submit" value="submit"></td>
+                <td><input type="submit" value="cancel"></td></tr>
+        </table>
+    <br>
+    <br>
+    <table border="1" align="center">
+        <tr>
+            <td>SLNO:</td>
+            <td>Date</td>
+            <td>Start Time</td>
+            <td>Description</td>
+            <td>Action</td>
+
+        </tr>
+      
+            {% for i in markevent %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.marketevent_date}}</td>
+            <td>{{i.marketevent_starttime}}</td>
+            <td>{{i.marketevent_description}}</td>
+            <td><a href="{% url 'market:delmarkevent' i.id%}">Delete</a></td>
+        </tr>
+        {% endfor %}
+      
+    </table>
+    </form>
+    <script>
+        {% if msg %}
+        alert("{{msg}}")
+        {% endif %}
+    </script>
+</body>
+</html>
+
+{% endblock content %}

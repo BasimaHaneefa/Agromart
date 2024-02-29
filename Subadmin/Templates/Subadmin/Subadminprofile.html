@@ -1,0 +1,46 @@
+{% extends 'Subadmin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subadmin profile page</title>
+</head>
+<body>
+    <h1 align="center">My Profile</h1>
+    <Table border="2" align="center" cellpadding="10" style="border-collapse: collapse;">
+        <form action="" method="post">
+                <tr>
+                    
+                  <td colspan="2"></td>  
+                    
+                    
+                </tr>
+                <tr>
+                    
+                    <td>Name</td>
+                    <td><input  value="{{data.name}}"></td>
+
+                </tr>
+                <tr>
+                    <td>Contact</td>
+                    <td><input value="{{data.contact}}"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input value="{{data.email}}"></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td><input value="{{data.address}}"></td>
+                </tr>
+        </form>
+    </Table>
+</body>
+</html>
+
+{% endblock content %}

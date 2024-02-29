@@ -1,0 +1,47 @@
+{% extends 'Admin/Head.html' %} 
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>Market Report</h1></center>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table border="1" align="center" cellpadding="10" style="border-collapse: collapse;">
+            <tr>
+                <td>From Date:</td>
+                <td><input type="date" name="frdate" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>To Date:</td>
+                <td><input type="date" name="todate" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2"><input type="submit" name="btn" value="Submit">&nbsp&nbsp<input type="reset" value="Cancel"></td>
+            </tr>
+        </table>
+        <br><br>
+        <table border="1" align="center" cellpadding="10" style="border-collapse: collapse;">
+            <tr>
+                <th>SI No</th>
+                <th>Farmer Name</th>
+                <th>Slot Booking Time</th>
+            </tr>
+                {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.farmer.name}}</td>
+                <td>{{i.slotbooktime}}</td>    
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %} 

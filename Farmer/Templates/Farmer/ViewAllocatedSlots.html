@@ -1,0 +1,35 @@
+{% extends 'Farmer/Head.html' %}
+{% load static %}
+{% block content %}
+
+<div id="data">
+    <table align="center" cellpadding="50" style="border-collapse: collapse">
+        <tr>
+            {% for i in Slots %}
+
+            <td>
+                <div style="text-align:center;border:1px solid black;margin:22px;padding:15px">
+                    
+                    <p>{{i.slotbook.slotbookdate}}</p>
+
+                    <p>{{i.slotreply_allocatetime}}</p>
+                    
+                    <p>{{i.slotreply_no}}</p>
+                    
+                    
+                    <br>
+                </div>
+            </td>
+            {% if forloop.counter|divisibleby:4 %}
+        </tr>
+        <tr>
+            {% endif %}
+
+
+            {% endfor %}
+    </table>
+    <br><br><br>
+    </div>
+
+
+    {% endblock content %}

@@ -1,0 +1,68 @@
+{% extends 'Farmer/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stock</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h3 align="center">Product Stock Details</h3>
+        <table align="center" cellpadding="10">
+            <tr>
+                <td>Date</td>
+                <td><input type="date" name="sdate" required="" autocomplete="off"></td>
+            </tr>
+            
+            <tr>
+                <th>Product</th>
+                <th>
+                <select name="sel_product" id="product" required="" autocomplete="off">
+                    <option value="">--select--</option>
+                    {% for i in product %}
+                    <option value="{{i.id}}">{{i.name}}</option>
+                    {% endfor %}
+                  </select>
+                </th>
+            </tr>
+            <tr>
+                <td>Quantity</td>
+                <td><input type="text" name="squantity" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Save" id=""><input type="submit" value="Cancel"></td>
+            </tr>
+        </table>
+
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>Date</th>
+                <th>Product Name</th>
+                <th>Image</th>
+                <th>Product Quantity</th>
+                <th>Action</th>
+            </tr>
+            {% for i in stock %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.date}}</td>
+            <td>{{i.product.name}}</td>
+            <td><img src="{{i.product.photo.url}}" width="100px" height="100px" /></td>
+            <td>{{i.quantity}}</td>
+            <td><a href="{% url 'farmer:delstock' i.id %}">Delete</a></td>
+
+        </tr>
+        {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+
+{% endblock content %}

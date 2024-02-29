@@ -1,0 +1,38 @@
+{% extends 'Subadmin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subadmin edit</title>
+</head>
+<body>
+    <h1 align="center">Edit Profile</h1>
+    <table align="center" cellpadding="10" style="border-collapse: collapse;">
+        <form action="" method="post">
+            {% csrf_token %}
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txtname" value="{{data.name}}" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td> Contact </td>
+                <td><input type="number" name="txtcontact" value="{{data.contact}}" required="" autocomplete="off" placeholder="0123456789" pattern="[0-9]{10}" required=""></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><input type="text" name="txtaddress" value="{{data.address}}" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="save" name="btn"><input type="reset" value="cancel" name="btnc"></td>
+            </tr>
+        </form>
+    </table>
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Document</title> 
+</head> 
+<body> 
+   
+    <table border="3" align="center" cellpadding="50" style="border-collapse: collapse">
+        <tr>
+            {% for i in dataimg %}
+
+             <td>  <div style="text-align:center;border:1px solid black;margin:22px;padding:20px"> <p><img src="{{i.productgallery_image.url}}" width="100px" height="100px" /></p></div></td>
+             {% endfor %}
+             
+        </tr>
+        <tr>
+        <td><center><p><a href="{% url 'Farmer:booking'  %}">BookNow</a></p></center></td>
+        </tr>
+    </table>  
+</body> 
+</html>

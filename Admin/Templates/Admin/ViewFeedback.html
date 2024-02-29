@@ -1,0 +1,80 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 align="center">FEEDBACKS</h1>
+    <table align="center" border="1"><br>
+        <tr align="center">
+            <td>Sl.No</td>
+            <td>Farmer Name</td>
+            <td>Email</td>
+            <td>Feedback</td>
+           
+            
+        </tr>
+        {% for i in farmerfeedback %}
+        <tr align="center">
+            <td>{{forloop.counter}}</td>
+            <td>{{i.farmer.name}}</td>
+            <td>{{i.farmer.email}}</td>
+            <td>{{i.feedback}}</td>
+            
+        
+        </tr>
+        {% endfor %}
+    </table>
+
+    <table align="center" border="1"><br>
+        <tr align="center">
+            <td>Sl.No</td>
+            <td>Market Name</td>
+            <td>Email</td>
+            <td>Feedback</td>
+           
+            
+        </tr>
+        {% for i in marketfeedback %}
+        <tr align="center">
+            <td>{{forloop.counter}}</td>
+            <td>{{i.market.name}}</td>
+            <td>{{i.market.email}}</td>
+            <td>{{i.feedback}}</td>
+            
+            
+        </tr>
+        {% endfor %}
+    </table>
+
+    <table align="center" border="1"><br>
+        <tr align="center">
+            <td>Sl.No</td>
+            <td>User Name</td>
+            <td>Email</td>
+            <td>Feedback</td>
+           
+           
+        </tr>
+        {% for i in userfeedback %}
+        <tr align="center">
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user.name}}</td>
+            <td>{{i.user.email}}</td>
+            <td>{{i.feedback}}</td>
+            
+            
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'User/Head.html' %}
+{% load static %}
+{% block content %}
+
+<table border="2" align="center" cellpadding="2">
+    <tr>
+        <th>Sl.no</th>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>contact</th>
+        <th>Content</th>
+        <th>product</th>
+        <th>action</th>
+
+    </tr>
+    {% for i in farmerdata %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.user.name}}</td>
+        <td>{{i.user.email}}</td>
+        <td>{{i.user.address}}</td>
+        <td>{{i.user.contact}}</td>
+        <td>{{i.content}}</td>
+        <td>{{i.product.name}}</td>
+        <td>
+            {% if i.status == 1 and i.payment_sts == 0 %}
+            <p>Request Accepted</p>
+            <p><a href="{% url 'user:paynow' i.id %}">Pay Now</a></p>
+            {% elif i.status == 2 %}
+            <p>Request Rejected!!</p>   
+            {% elif i.payment_sts == 1 %}
+            <p>Payment Completed!!</p>
+            {% else %}
+            <p>Pending...</p>
+            {% endif %}
+        </td>
+
+
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock content %}

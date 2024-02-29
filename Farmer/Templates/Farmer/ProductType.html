@@ -1,0 +1,57 @@
+{% extends 'Farmer/Head.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h1 align="center">PRODUCT TYPE</h1>
+        <table border="2" align="center" cellpadding="10" style="border-collapse: collapse;">
+
+            <tr>
+                <td>
+                    Product Type
+                </td>
+                <td><input type="text" name="ptype" value="{{ptype.product_type}}" id="" required="" autocomplete="off"></td>
+
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="save" name="btn"><input type="reset" value="cancel" name="btnc"></td>
+            </tr>
+
+        </table>
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>ProductType</th>
+                <th>Action</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i}}</td>
+                <td><a href="{% url 'farmer:delptype' i.id %}">Delete</a>/
+                <a href="{% url 'farmer:editptype' i.id %}">Edit</a></td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+    </form>
+    <script>
+        {% if msg %}
+        alert("{{msg}}")
+        {% endif %}
+    </script>
+</body>
+</html>
+{% endblock content %}

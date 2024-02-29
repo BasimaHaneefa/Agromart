@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h2><b>Farmer Verification<br></b></h2></center>
+    <form action="" method="post" id="UserForm" data-place-url="{% url 'Guest:Ajax-Place' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <table border="1" align="center">
+            <tr>
+                <td>SLNO</td>
+                <td>Farmer Name</td>
+                <td>Contact</td>
+                <td>Email</td>
+                <td>Image</td>
+                <td>Address</td>
+                <td>District</td>
+                <td>Place</td>  
+                <td colspan="4">Action</td>
+                
+    
+            </tr>
+          
+                {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.farmername}}</td>
+                <td>{{i.farmercontact}}</td>
+                <td>{{i.farmeremail}}</td>
+                <td align="center"><img src="{{i.farmerimage.url}}" width="150" height="150"></td> 
+                <td>{{i.farmeraddress}}</td>
+                <td>{{i.place.district}}</td>
+                <td>{{i.place}}</td>
+                <td><a href="{% url 'Subadmin:acceptfarmer' i.id%}">Accept</a></td>
+            </tr>
+            {% endfor %}
+          
+        </table>
+      
+
+    </form>
+</body>
+</html>

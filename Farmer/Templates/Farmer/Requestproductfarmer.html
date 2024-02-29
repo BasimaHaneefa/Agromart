@@ -1,0 +1,81 @@
+{% extends 'Farmer/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REQUEST</title>
+</head>
+<body>
+    <h1 align="center">Product Request for FARMER</h1> 
+    <form action="" method="POST">
+        {% csrf_token %}
+    
+        <table align="center"  cellpadding="10">
+            <tr>
+                <td> Product</td>
+                <td><select name="sel_product" id="product">
+                    <option value="">--select--</option>
+                    {% for i in data %}
+                    <option value="{{i.id}}">{{i.name}}</option>
+                    {% endfor %}
+                  </select></td>
+            </tr>
+        <tr>
+            <td>content</td>
+            <td><input type="text" name="fcontent" id=""></td>
+        </tr> 
+
+       
+        <tr>
+            <td align="center" colspan="2"><input type="submit" value="send">&nbsp;&nbsp;<input type="reset" value="cancel"></td>
+    
+        </tr>
+
+    </table>
+
+    <table border="2" align="center" cellpadding="2">
+        <tr>
+            <th>Sl.no</th>
+            <th>UserName</th>
+            <th>Email</th>
+           <th>Address</th>
+           <th>contact</th>
+            <th>Content</th>
+            <th>product</th>
+            <th>Action</th>
+                
+        
+           
+        
+        </tr>
+        {% for i in farmerdata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.farmer.name}}</td>
+            <td>{{i.farmer.email}}</td>
+            <td>{{i.farmer.address}}</td>
+            <td>{{i.farmer.contact}}</td>
+            <td>{{i.content}}</td>
+            <td>{{i.product.name}}</td>
+            <td><a href="{% url 'farmer:delrequest' i.id %}">Delete</a></td>
+
+            
+        
+            
+        </tr>
+        {% endfor %}
+
+    </table>
+</form>
+    
+
+    
+</body>
+</html>
+
+{% endblock content %}
